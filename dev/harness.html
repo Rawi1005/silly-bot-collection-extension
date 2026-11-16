@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Silly Bot Collection: dev harness</title>
+    <!-- Font Awesome is not bundled here; icons render as empty boxes. SillyTavern ships FA 6.5 itself. -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --SmartThemeBodyColor: rgb(220, 220, 210);
+            --SmartThemeEmColor: rgb(145, 145, 145);
+            --SmartThemeUnderlineColor: rgb(188, 231, 207);
+            --SmartThemeQuoteColor: rgb(225, 138, 36);
+            --SmartThemeBlurTintColor: rgba(23, 23, 23, 1);
+            --SmartThemeChatTintColor: rgba(32, 32, 32, 1);
+            --SmartThemeBorderColor: rgba(0, 0, 0, 0.5);
+            --SmartThemeShadowColor: rgba(0, 0, 0, 0.5);
+            --mainFontSize: 15px;
+            --mainFontFamily: "Noto Sans", system-ui, sans-serif;
+        }
+        body.light {
+            --SmartThemeBodyColor: rgb(30, 30, 30);
+            --SmartThemeEmColor: rgb(100, 100, 100);
+            --SmartThemeQuoteColor: rgb(30, 100, 200);
+            --SmartThemeUnderlineColor: rgb(20, 120, 80);
+            --SmartThemeBlurTintColor: rgb(245, 245, 240);
+            --SmartThemeChatTintColor: rgb(255, 255, 255);
+            --SmartThemeBorderColor: rgba(0, 0, 0, 0.2);
+            --SmartThemeShadowColor: rgba(0, 0, 0, 0.15);
+        }
+        body { margin: 0; background: #333; color: var(--SmartThemeBodyColor); font-family: var(--mainFontFamily); background: var(--SmartThemeBlurTintColor); }
+        .harness-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding: 10px 16px; border-bottom: 1px solid #555; }
+        .harness-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; }
+        @media (max-width: 800px) { .harness-cols { grid-template-columns: 1fr; } }
+        .harness-box { border: 1px dashed #777; padding: 10px; border-radius: 8px; }
+        .text_pole { background: rgba(0,0,0,.3); color: inherit; border: 1px solid #666; border-radius: 6px; padding: 6px 8px; }
+        .menu_button { cursor: pointer; padding: 6px 10px; border: 1px solid #666; border-radius: 6px; background: rgba(0,0,0,.3); color: inherit; }
+        .list-group-item { padding: 6px 10px; cursor: pointer; }
+        .inline-drawer-content { display: none; }
+        .inline-drawer.open .inline-drawer-content { display: block; }
+        .inline-drawer-header { cursor: pointer; display: flex; justify-content: space-between; }
+        dialog.popup { width: min(95vw, 1200px); max-width: 95vw; height: 90dvh; background: var(--SmartThemeBlurTintColor); color: inherit; border: 1px solid #666; border-radius: 10px; padding: 8px 14px; }
+        dialog.popup.small { width: min(92vw, 500px); height: auto; }
+        dialog.popup::backdrop { background: rgba(0,0,0,.6); }
+        .popup-controls { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+        .popup-close { position: absolute; top: 4px; right: 6px; }
+        #toasts { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 99999; display: flex; flex-direction: column; gap: 6px; width: min(420px, 92vw); }
+        .toast { padding: 10px 12px; border-radius: 8px; background: #222; color: #fff; border-left: 4px solid gray; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+        .toast-success { border-color: #3a3; } .toast-error { border-color: #d33; } .toast-warning { border-color: #db3; } .toast-info { border-color: #39d; }
+        #harness-log { font-family: monospace; font-size: 12px; white-space: pre-wrap; max-height: 260px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <div class="harness-bar">
+        <strong>Dev harness</strong>
+        <span>Stubbed SillyTavern context. Base URL to use: <code id="harness-base"></code></span>
+        <label><input type="checkbox" id="harness-light"> light theme</label>
+        <a href="?lang=th" style="color:inherit">ภาษาไทย</a>
+        <a href="?lang=en" style="color:inherit">English</a>
+        <button class="menu_button" id="harness-reset">Reset stored settings</button>
+    </div>
+    <div class="harness-cols">
+        <div class="harness-box">
+            <h3>Extensions panel (#extensions_settings2)</h3>
+            <div id="extensions_settings2"></div>
+            <h3>Wand menu (#extensionsMenu)</h3>
+            <div id="extensionsMenu"></div>
+        </div>
+        <div class="harness-box">
+            <h3>Fake SillyTavern state</h3>
+            <div id="harness-log"></div>
+        </div>
+    </div>
+    <div id="toasts" aria-live="polite"></div>
+    <script type="module" src="./harness.js"></script>
+</body>
+</html>

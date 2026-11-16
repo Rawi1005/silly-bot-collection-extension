@@ -1,0 +1,15 @@
+{
+    "name": "sillytavern-silly-bot-collection",
+    "private": true,
+    "version": "0.1.0",
+    "description": "Dev scripts only. SillyTavern loads this extension straight from the folder; there are no dependencies and no build step.",
+    "type": "module",
+    "license": "AGPL-3.0-only",
+    "engines": {
+        "node": ">=20"
+    },
+    "scripts": {
+        "test": "node --test \"tests/*.test.mjs\"",
+        "mock": "node dev/mock-server.mjs"
+    }
+}

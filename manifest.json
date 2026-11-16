@@ -1,0 +1,13 @@
+{
+    "display_name": "Silly Bot Collection",
+    "version": "0.1.0",
+    "author": "Rawi1005",
+    "homePage": "https://bots.rolezy.com",
+    "js": "index.js",
+    "css": "style.css",
+    "loading_order": 100,
+    "minimum_client_version": "1.12.12",
+    "requires": [],
+    "optional": [],
+    "dependencies": []
+}
